@@ -1,0 +1,718 @@
+/* ============================================================
+   PlayAble — Global Design System + Game Styles
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #1a1625;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Smooth scrolling for portal pages */
+html { scroll-behavior: smooth; }
+
+/* ============================================================
+   Game Container (preserved from original)
+   ============================================================ */
+
+#game-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    z-index: 50;
+}
+
+#game-canvas {
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 4 / 3;
+    background: #000;
+    display: block;
+}
+
+#game-canvas.canvas2d {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* --- Start screen --- */
+#start-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse at center, rgba(20,10,40,0.95) 0%, rgba(0,0,0,0.98) 100%);
+    z-index: 10;
+}
+
+.start-content {
+    text-align: center;
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#start-screen h1 {
+    font-size: clamp(20px, 4vw, 32px);
+    margin: 12px 0 4px;
+    text-shadow: 0 0 20px rgba(108,92,231,0.5);
+    letter-spacing: 1px;
+}
+
+#start-screen .subtitle {
+    font-size: clamp(12px, 2vw, 16px);
+    color: #888;
+    margin-bottom: 24px;
+}
+
+#logo {
+    max-width: min(300px, 60vw);
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 20px rgba(108,92,231,0.3));
+}
+
+#start-btn {
+    padding: 14px 48px;
+    font-size: clamp(16px, 3vw, 22px);
+    background: linear-gradient(135deg, #6C5CE7, #5a4bd1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 3px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(108,92,231,0.4);
+}
+
+#start-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 30px rgba(108,92,231,0.6);
+}
+#start-btn:active { transform: scale(0.97); }
+
+/* --- Loading screen --- */
+#loading-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    z-index: 20;
+}
+
+.loading-content {
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #333;
+    border-top-color: #6C5CE7;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.progress-bar {
+    width: min(300px, 70vw);
+    height: 6px;
+    background: #222;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 12px auto;
+}
+
+#progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #6C5CE7, #a29bfe);
+    border-radius: 3px;
+    transition: width 0.15s;
+}
+
+#loading-text {
+    font-size: 14px;
+    color: #888;
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- Mic indicator --- */
+#mic-indicator {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    padding: 10px 28px;
+    border-radius: 24px;
+    font-size: 22px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    min-width: 160px;
+    justify-content: center;
+}
+
+#mic-indicator.recognized {
+    border-color: rgba(80,255,80,0.5);
+    box-shadow: 0 0 20px rgba(80,255,80,0.2);
+}
+
+#mic-icon { font-size: 24px; }
+#mic-icon.listening { animation: pulse 1.5s ease-in-out infinite; }
+
+#mic-word {
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-width: 60px;
+    text-align: center;
+    transition: color 0.3s;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* --- Voice help button (in-game) --- */
+#voice-help-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 48px;
+    height: 48px;
+    background: rgba(108,92,231,0.35);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(108,92,231,0.5);
+    border-radius: 50%;
+    color: #a29bfe;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 5;
+    transition: background 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: voiceHelpPulse 2s ease-in-out 3;
+}
+
+@keyframes voiceHelpPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(108,92,231,0); }
+    50% { box-shadow: 0 0 0 8px rgba(108,92,231,0.3); }
+}
+
+#voice-help-btn:hover {
+    background: rgba(108,92,231,0.5);
+    border-color: rgba(108,92,231,0.6);
+}
+
+#voice-help-panel {
+    position: absolute;
+    top: 70px;
+    right: 14px;
+    background: rgba(15,15,20,0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(108,92,231,0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    z-index: 15;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.voice-help-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.voice-help-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 12px;
+    align-items: center;
+}
+
+.voice-help-desc {
+    font-size: 12px;
+    color: #999;
+}
+
+/* Shared voice-cmd style (used in game + portal) */
+.voice-cmd {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(108,92,231,0.15);
+    border: 1px solid rgba(108,92,231,0.3);
+    border-radius: 6px;
+    color: #a29bfe;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* --- Mode toggle --- */
+#mode-toggle {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    color: #ccc;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    z-index: 5;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    text-transform: uppercase;
+}
+
+#mode-toggle:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,0.3);
+}
+
+#mode-toggle.active {
+    background: rgba(108,92,231,0.4);
+    border-color: rgba(108,92,231,0.5);
+    color: #a29bfe;
+}
+
+/* --- Settings button --- */
+#settings-btn {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 48px;
+    height: 48px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    color: #ccc;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 5;
+    transition: color 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#settings-btn:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,0.3);
+}
+
+/* --- Settings panel (in-game) --- */
+#settings-panel {
+    position: absolute;
+    top: 70px;
+    left: 14px;
+    background: rgba(15,15,20,0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px 20px;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 200px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+
+#settings-panel h3 {
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+#settings-panel label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+#settings-panel input[type="range"] {
+    width: 90px;
+    accent-color: #6C5CE7;
+}
+
+#settings-panel input[type="checkbox"] {
+    accent-color: #6C5CE7;
+}
+
+#settings-close {
+    padding: 6px 16px;
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 4px;
+    transition: background 0.2s;
+}
+
+#settings-close:hover { background: #333; }
+
+.settings-section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666;
+    margin-top: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* --- Fullscreen --- */
+#game-container:fullscreen {
+    background: #000;
+}
+
+#game-container:-webkit-full-screen {
+    background: #000;
+}
+
+/* --- Gesture camera overlay (PiP) --- */
+#gesture-overlay {
+    position: absolute;
+    bottom: 56px;
+    left: 12px;
+    width: 400px;
+    height: 300px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 2px solid rgba(108, 92, 231, 0.5);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
+    z-index: 5;
+    background: #000;
+}
+
+#gesture-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    display: block;
+}
+
+#gesture-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1);
+    pointer-events: none;
+}
+
+#gesture-label {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(108, 92, 231, 0.9);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 4px 20px;
+    border-radius: 12px;
+    letter-spacing: 2px;
+    min-width: 48px;
+    text-align: center;
+    pointer-events: none;
+}
+
+/* --- Input mode chooser --- */
+#input-mode-chooser {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, rgba(26,22,37,0.99) 0%, rgba(10,8,20,0.99) 100%);
+    z-index: 25;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.chooser-content {
+    text-align: center;
+    max-width: 640px;
+    padding: 32px 24px;
+}
+
+.chooser-content h2 {
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.chooser-sub {
+    color: #777;
+    font-size: clamp(13px, 2vw, 15px);
+    margin-bottom: 36px;
+    line-height: 1.5;
+}
+
+.chooser-options {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.chooser-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 180px;
+    padding: 28px 18px 24px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fff;
+    transition: all 0.25s ease;
+    font-family: inherit;
+}
+
+.chooser-card:hover {
+    border-color: rgba(108, 92, 231, 0.5);
+    background: linear-gradient(160deg, rgba(108,92,231,0.12) 0%, rgba(108,92,231,0.04) 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(108, 92, 231, 0.15);
+}
+
+.chooser-card:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(108, 92, 231, 0.2);
+}
+
+.chooser-card.selected {
+    border-color: #6C5CE7;
+    background: linear-gradient(160deg, rgba(108,92,231,0.18) 0%, rgba(108,92,231,0.06) 100%);
+    box-shadow: 0 0 0 1px rgba(108, 92, 231, 0.3), 0 8px 24px rgba(108, 92, 231, 0.15);
+}
+
+.chooser-card.selected .chooser-icon {
+    background: rgba(108, 92, 231, 0.25);
+}
+
+.chooser-start {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 14px 48px;
+    background: linear-gradient(135deg, #6C5CE7, #5a4bd1);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.35);
+}
+
+.chooser-start:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 30px rgba(108, 92, 231, 0.5);
+}
+
+.chooser-start:active {
+    transform: scale(0.97);
+}
+
+.chooser-icon {
+    font-size: 40px;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: 16px;
+}
+
+.chooser-label {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.chooser-desc {
+    font-size: 11px;
+    color: #777;
+    line-height: 1.5;
+    max-width: 160px;
+}
+
+@media (max-width: 580px) {
+    .chooser-options {
+        flex-direction: column;
+        align-items: center;
+    }
+    .chooser-card {
+        width: 240px;
+        flex-direction: row;
+        padding: 16px 20px;
+        gap: 14px;
+        text-align: left;
+    }
+    .chooser-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 28px;
+        flex-shrink: 0;
+    }
+    .chooser-card > :not(.chooser-icon) {
+        text-align: left;
+    }
+}
+
+/* --- Gesture help button + panel (in-game) --- */
+#gesture-help-btn {
+    position: absolute;
+    top: 14px;
+    right: 70px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 118, 117, 0.35);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 118, 117, 0.5);
+    border-radius: 50%;
+    color: #ff7675;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 5;
+    transition: background 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: gestureHelpPulse 2s ease-in-out 3;
+}
+
+@keyframes gestureHelpPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 118, 117, 0); }
+    50% { box-shadow: 0 0 0 8px rgba(255, 118, 117, 0.3); }
+}
+
+#gesture-help-btn:hover {
+    background: rgba(255, 118, 117, 0.5);
+    border-color: rgba(255, 118, 117, 0.6);
+}
+
+#gesture-help-panel {
+    position: absolute;
+    top: 70px;
+    right: 70px;
+    background: rgba(15, 15, 20, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 118, 117, 0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    z-index: 15;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.gesture-help-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.gesture-help-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 12px;
+    align-items: center;
+}
+
+.gesture-help-desc {
+    font-size: 12px;
+    color: #999;
+}
+
+.gesture-cmd {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(255, 118, 117, 0.15);
+    border: 1px solid rgba(255, 118, 117, 0.3);
+    border-radius: 6px;
+    color: #ff7675;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* --- Heart particle easter egg --- */
+.heart-particle {
+    position: absolute;
+    bottom: -40px;
+    pointer-events: none;
+    z-index: 30;
+    animation: heart-float linear forwards;
+    opacity: 0;
+}
+
+@keyframes heart-float {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.3) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) scale(1.2) rotate(20deg);
+    }
+}

@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# C/C++ build artifacts
+*.o
+*.a
+*.exe
+game-lite/hugo_lite
+
+# Web converted assets
+web/assets/
+
+# RAR files
+*.rar
+
+# Session transcripts
+2026-*.txt
+web/2026-*.txt

@@ -1,0 +1,77 @@
+export const games = [
+    {
+        id: 'hugo',
+        title: 'Hugo - Into the Multiverse',
+        subtitle: 'Web Edition',
+        description: 'Help Hugo navigate through the enchanted forest, dodge obstacles, and explore mysterious caves! This classic 90s TV show game lets you control Hugo using your voice or keyboard — just like calling in on the phone.',
+        coverImage: 'assets/images/logo.png',
+        accessibility: ['voice', 'keyboard', 'gesture'],
+        status: 'playable',
+        genre: 'Platformer',
+        ageRating: '3+',
+        controls: {
+            keyboard: [
+                { keys: ['W', 'Arrow Up'], action: 'Jump' },
+                { keys: ['S', 'Arrow Down'], action: 'Duck' },
+                { keys: ['Space'], action: 'Start / Confirm' },
+                { keys: ['3', '6', '9'], action: 'Choose rope' },
+                { keys: ['Shift'], action: 'Skip video' },
+                { keys: ['Esc'], action: 'Quit' },
+            ],
+            voice: [
+                { cmd: 'up', action: 'Jump' },
+                { cmd: 'down', action: 'Duck' },
+                { cmd: 'go', action: 'Start game' },
+                { cmd: 'left / right', action: 'Ropes' },
+                { cmd: 'three / six / nine', action: 'Ropes' },
+                { cmd: 'stop', action: 'Quit' },
+                { cmd: 'no', action: 'Skip video' },
+            ],
+            gesture: [
+                { cmd: 'Open hand', action: 'Jump' },
+                { cmd: 'Fist', action: 'Duck' },
+                { cmd: 'Thumbs up', action: 'Start / Confirm' },
+                { cmd: '3 fingers', action: 'Left rope' },
+                { cmd: '6 fingers (two hands)', action: 'Middle rope' },
+                { cmd: '8 fingers (two hands)', action: 'Right rope' },
+            ],
+        },
+    },
+    {
+        id: 'hugo-cave',
+        title: 'Hugo - Cave Explorer',
+        subtitle: 'Coming Soon',
+        description: 'Descend into the depths of the troll cave. Swing on ropes, dodge bats, and collect treasures in this vertical climbing adventure.',
+        coverImage: null,
+        accessibility: ['voice', 'keyboard'],
+        status: 'coming_soon',
+        genre: 'Platformer',
+        ageRating: '3+',
+    },
+    {
+        id: 'hugo-train',
+        title: 'Hugo - Train Ride',
+        subtitle: 'Coming Soon',
+        description: 'Race through the countryside on a runaway mine cart. Duck under bridges, jump over gaps, and collect gold coins along the tracks.',
+        coverImage: null,
+        accessibility: ['voice', 'keyboard'],
+        status: 'coming_soon',
+        genre: 'Runner',
+        ageRating: '3+',
+    },
+    {
+        id: 'hugo-plane',
+        title: 'Hugo - Airplane',
+        subtitle: 'Coming Soon',
+        description: 'Take to the skies in Hugo\'s biplane! Navigate through clouds, avoid obstacles, and perform daring aerial maneuvers.',
+        coverImage: null,
+        accessibility: ['voice', 'keyboard'],
+        status: 'coming_soon',
+        genre: 'Arcade',
+        ageRating: '3+',
+    },
+];
+
+export function getGameById(id) {
+    return games.find(g => g.id === id) || null;
+}

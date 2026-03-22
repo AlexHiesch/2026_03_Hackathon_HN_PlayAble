@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayAble — Games for Everyone</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+    <!-- Portal header -->
+    <header id="portal-header">
+        <a href="#/" class="portal-logo">PlayAble</a>
+        <nav>
+            <a href="#/">Home</a>
+            <a href="#/library">Library</a>
+            <a href="#/settings">Accessibility</a>
+        </nav>
+    </header>
+
+    <!-- Portal page content -->
+    <main id="app-content"></main>
+
+    <!-- Game container (hidden until play route) -->
+    <div id="game-container" style="display:none">
+        <canvas id="game-canvas"></canvas>
+        <div id="start-screen">
+            <div class="start-content">
+                <img src="assets/images/logo.png" alt="Hugo" id="logo" onerror="this.style.display='none'">
+                <h1>Hugo - Into the Multiverse</h1>
+                <p class="subtitle">Web Edition</p>
+                <button id="start-btn" style="display:none">START GAME</button>
+            </div>
+        </div>
+        <div id="loading-screen" style="display:none">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>Loading assets...</p>
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <p id="loading-text">0%</p>
+            </div>
+        </div>
+        <div id="gesture-overlay" style="display:none">
+            <video id="gesture-video" autoplay playsinline muted></video>
+            <canvas id="gesture-canvas"></canvas>
+            <div id="gesture-label"></div>
+        </div>
+        <div id="mic-indicator" style="display:none">
+            <span id="mic-icon">&#127908;</span>
+            <span id="mic-word"></span>
+        </div>
+        <button id="voice-help-btn" title="Voice commands" style="display:none">?</button>
+        <div id="voice-help-panel" style="display:none">
+            <div class="voice-help-title">Voice Commands</div>
+            <div class="voice-help-grid">
+                <span class="voice-cmd">"up"</span><span class="voice-help-desc">Jump over obstacles</span>
+                <span class="voice-cmd">"down"</span><span class="voice-help-desc">Duck under branches</span>
+                <span class="voice-cmd">"go"</span><span class="voice-help-desc">Start / confirm</span>
+                <span class="voice-cmd">"left"</span><span class="voice-help-desc">Left rope</span>
+                <span class="voice-cmd">"six"</span><span class="voice-help-desc">Middle rope</span>
+                <span class="voice-cmd">"right"</span><span class="voice-help-desc">Right rope</span>
+                <span class="voice-cmd">"stop"</span><span class="voice-help-desc">Quit / hang up</span>
+                <span class="voice-cmd">"no"</span><span class="voice-help-desc">Skip video</span>
+            </div>
+        </div>
+        <button id="gesture-help-btn" title="Gesture commands" style="display:none">&#9995;</button>
+        <div id="gesture-help-panel" style="display:none">
+            <div class="gesture-help-title">Hand Gestures</div>
+            <div class="gesture-help-grid">
+                <span class="gesture-cmd">Open hand</span><span class="gesture-help-desc">Jump over obstacles</span>
+                <span class="gesture-cmd">Fist</span><span class="gesture-help-desc">Duck under branches</span>
+                <span class="gesture-cmd">Thumbs up</span><span class="gesture-help-desc">Start / confirm</span>
+                <span class="gesture-cmd">3 fingers</span><span class="gesture-help-desc">Left rope</span>
+                <span class="gesture-cmd">6 fingers</span><span class="gesture-help-desc">Middle rope (two hands)</span>
+                <span class="gesture-cmd">8 fingers</span><span class="gesture-help-desc">Right rope (two hands)</span>
+            </div>
+        </div>
+        <button id="mode-toggle" title="Toggle CRT / Classic" style="display:none">CRT</button>
+        <button id="settings-btn" title="Settings" style="display:none">&#9881;</button>
+        <div id="settings-panel" style="display:none">
+            <h3>Settings</h3>
+            <div class="settings-section-label">Input</div>
+            <label>
+                <input type="checkbox" id="voice-toggle">
+                Voice Control
+            </label>
+            <label>
+                <input type="checkbox" id="gesture-toggle">
+                Hand Gestures
+            </label>
+            <div class="settings-section-label">Gameplay</div>
+            <label>
+                Game Speed
+                <input type="range" id="speed-slider" min="30" max="120" value="70">
+            </label>
+            <div class="settings-section-label">Display</div>
+            <label>
+                <input type="checkbox" id="crt-toggle" checked>
+                CRT Effects
+            </label>
+            <label>
+                Scanlines
+                <input type="range" id="scanline-slider" min="0" max="100" value="25">
+            </label>
+            <label>
+                Curvature
+                <input type="range" id="curvature-slider" min="0" max="100" value="40">
+            </label>
+            <label>
+                Chromatic
+                <input type="range" id="chromatic-slider" min="0" max="100" value="30">
+            </label>
+            <label>
+                Vignette
+                <input type="range" id="vignette-slider" min="0" max="100" value="40">
+            </label>
+            <button id="settings-close">Close</button>
+        </div>
+    </div>
+
+    <!-- TF.js loaded lazily by portal.js when entering game -->
+    <script type="module">
+        import { initPortal } from './js/portal.js';
+        initPortal();
+    </script>
+</body>
+</html>
