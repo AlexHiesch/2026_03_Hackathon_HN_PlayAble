@@ -1,6 +1,6 @@
 # PlayAble - Accessible Gaming Portal
 
-**Live Demo: [hackathonhn-playable.vercel.app](https://hackathonhn-playable.vercel.app)**
+**Live Demo: [web-beige-five-74.vercel.app](https://web-beige-five-74.vercel.app/)**
 
 PlayAble is an accessible gaming portal built during a hackathon in Heilbronn (March 2026). It transforms classic retro games into an inclusive web experience with multiple input methods — keyboard, voice commands, and hand gesture recognition — so everyone can play.
 
