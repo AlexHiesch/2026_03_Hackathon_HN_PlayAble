@@ -1,5 +1,7 @@
 # PlayAble - Accessible Gaming Portal
 
+**Live Demo: [hackathonhn-playable.vercel.app](https://hackathonhn-playable.vercel.app)**
+
 PlayAble is an accessible gaming portal built during a hackathon in Heilbronn (March 2026). It transforms classic retro games into an inclusive web experience with multiple input methods — keyboard, voice commands, and hand gesture recognition — so everyone can play.
 
 The first game featured is **Hugo - Into the Multiverse**, a reimplementation of the beloved 90s Hugo TV show minigames where players help Hugo navigate through an enchanted forest and mysterious caves.
