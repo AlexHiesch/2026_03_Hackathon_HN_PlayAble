@@ -6,6 +6,16 @@ PlayAble is an accessible gaming portal built during a hackathon in Heilbronn (M
 
 The first game featured is **Hugo - Into the Multiverse**, a reimplementation of the beloved 90s Hugo TV show minigames where players help Hugo navigate through an enchanted forest and mysterious caves.
 
+## Screenshots
+
+| Portal Home | Game Library |
+|:-----------:|:------------:|
+| ![Portal](screenshots/portal.png) | ![Library](screenshots/library.png) |
+
+| Input Selection | Gameplay with Hand Gestures |
+|:---------------:|:---------------------------:|
+| ![Controls](screenshots/controls.png) | ![Gameplay](screenshots/Gameplay.png) |
+
 ## Features
 
 - **Multi-Input Controls**: Play using keyboard, voice, camera-based hand gestures, or any combination simultaneously
